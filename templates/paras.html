@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
   
-  <Form action="/" ><input type="submit" value="Change Paragraph"/></Form>
+  <Form action="/" ><input type="submit" value="Clear Paragraph"/></Form>
 
   <h4>Found in Paragraphs with ids: <h2>
-    {% for i in range(flen-1, -1, -1) %}
+    {% for i in range(flen) %}
        {{ found[i] }},&nbsp;   
     {% endfor %}
   </h2></h4>
@@ -13,8 +13,8 @@
     <input required autocomplete="off" placeholder="key to search?" name="key" type="text" />
     <input type="submit" value="search"/>
 
-    {% for x in range(len-1, -1, -1) %}
-      <h4>Paragraph id: {{x}}</h4>   
+    {% for x in range(plen) %}
+      <h4>Paragraph id: {{x+1}}</h4>   
       <p>{{paragraphs[x]}}</p>
     {% endfor %}
   </Form>
