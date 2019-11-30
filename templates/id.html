@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+{% block content %}
+	<input placeholder="key to search?" name="search" type="text" />
+  {% for i in range(len) %}
+    <h4>Paragraph id: {{i}}</h4>   
+    <p>{{paragraphs[i]}}</p>
+  {% endfor %}
+{% endblock content %}
