@@ -10,9 +10,8 @@ def home():
   if request.method == 'POST':
     paragraphs = request.form['para'].split("\r\n\r\n")
     paragraphs.reverse()
-    paragraphs.append(' ')
     
-    return render_template('paras.html', paragraphs=paragraphs, plen=len(paragraphs)-1, flen=-1)
+    return render_template('paras.html', paragraphs=paragraphs, plen=len(paragraphs), flen=-1)
   else:
     return render_template('home.html')
 
@@ -22,7 +21,7 @@ def search():
   if request.method == 'POST':
     global paragraphs
     key = request.form['key'].strip().lower()
-    found, plen = [], len(paragraphs)-1
+    found, plen = [], len(paragraphs)
     
     if plen < 10:
       for i in range(plen):      
@@ -42,5 +41,5 @@ def search():
   else:
     return render_template('home.html')
 
-if __name__ == '__main__':
-	app.run(debug=True)
+# if __name__ == '__main__':
+	# app.run(debug=True)
