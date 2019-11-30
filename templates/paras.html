@@ -4,13 +4,13 @@
   <Form action="/" ><input type="submit" value="Change Paragraph"/></Form>
 
   <h4>Found in Paragraphs with ids: <h2>
-    {% for i in range(flen) %}
+    {% for i in range(flen-1, -1, -1) %}
        {{ found[i] }},&nbsp;   
     {% endfor %}
   </h2></h4>
   
   <Form method="POST" action="/search" >
-    <input autocomplete="off" placeholder="key to search?" name="key" type="text" />
+    <input required autocomplete="off" placeholder="key to search?" name="key" type="text" />
     <input type="submit" value="search"/>
 
     {% for x in range(len-1, -1, -1) %}

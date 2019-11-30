@@ -15,14 +15,14 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/search', methods=['GET', 'POST'])
+@app.route('/search', methods=['POST'])
 def search():
   if request.method == 'POST':
     global paragraphs
     key = request.form['key'].strip().lower()
     found = []
 
-    for i in range(len(paragraphs)):
+    for i in range(len(paragraphs)):      
       for v in paragraphs[i].split(' '):
         if key == v.lower():
           found.append(i)
