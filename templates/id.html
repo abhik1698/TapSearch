@@ -1,8 +1,23 @@
 {% extends "layout.html" %}
 {% block content %}
-	<input placeholder="key to search?" name="search" type="text" />
-  {% for i in range(len) %}
-    <h4>Paragraph id: {{i}}</h4>   
-    <p>{{paragraphs[i]}}</p>
-  {% endfor %}
+  
+  <Form action="/" ><input type="submit" value="Change Paragraph"/></Form>
+
+  <h4>Found in Paragraphs with ids: <h2>
+    {% for i in range(flen) %}
+       {{ found[i]}},&nbsp;   
+    {% endfor %}
+  </h2></h4>
+  
+  <Form method="POST" action="/search">
+    <input placeholder="key to search?" name="key" type="text" />
+    <input type="submit" value="search"/>
+
+    {% for x in range(len-1, -1, -1) %}
+      <h4>Paragraph id: {{x}}</h4>   
+      <p>{{paragraphs[x]}}</p>
+    {% endfor %}
+  </Form>
+
+
 {% endblock content %}
