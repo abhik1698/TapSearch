@@ -26,13 +26,14 @@ def search():
     if plen < 10:
       for i in range(plen):      
         for v in paragraphs[i].split(' '):
-          if key == v.lower():
+          if key == v.lower() or key+'.' == v.lower() or key+',' == v.lower() or '('+key+')' == v.lower() or '[(]'+key+']' == v.lower() or '\"'+key+'\"' == v.lower() or '\''+key+'\'' == v.lower() or key+'/' == v.lower() or '/'+key == v.lower():
+            # cases to match sentences with keys even for string-key to match with key
             found.append(i+1)
             break
     else: #To check top 10 paragraphs
       for i in range(10):      
         for v in paragraphs[i].split(' '):
-          if key == v.lower():
+          if key == v.lower() or key+'.' == v.lower() or key+',' == v.lower() or '('+key+')' == v.lower() or '[(]'+key+']' == v.lower() or '\"'+key+'\"' == v.lower() or '\''+key+'\'' == v.lower() or key+'/' == v.lower() or '/'+key == v.lower():
             found.append(i+1)
             break
 
