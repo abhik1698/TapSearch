@@ -38,10 +38,16 @@ def search():
             found.append(i+1)
             break
           
+    if len(found) > 0:
+      return render_template('paras.html', found=found, flen=len(found), paragraphs=paragraphs, plen=plen)
+    else:
+      return redirect('/search')
+
+  elif request.method == 'GET':
+    found = []
     return render_template('paras.html', found=found, flen=len(found), paragraphs=paragraphs, plen=plen)
-  
   else:
     return render_template('home.html')
 
 # if __name__ == '__main__':
-# 	app.run(debug=True)
+	# app.run(debug=True)
