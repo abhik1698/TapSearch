@@ -8,7 +8,7 @@ paragraphs = []
 def home():
   global paragraphs
   if request.method == 'POST':
-    paragraphs = request.form['para'].split("\r\n\r\n")
+    paragraphs = request.form['para'].strip().split("\r\n\r\n")
     paragraphs.reverse()
     
     return render_template('paras.html', paragraphs=paragraphs, plen=len(paragraphs), flen=-1)
