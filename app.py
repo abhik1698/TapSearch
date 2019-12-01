@@ -1,12 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 
 app = Flask(__name__)
 
 paragraphs = []
+plen = len(paragraphs)
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
-  global paragraphs
+  global paragraphs, plen
   if request.method == 'POST':
     paragraphs = request.form['para'].strip().split("\r\n\r\n")
     paragraphs.reverse()
@@ -16,10 +17,10 @@ def home():
     return render_template('home.html')
 
 
-@app.route('/search', methods=['POST'])
+@app.route('/search', methods=['GET', 'POST'])
 def search():
   if request.method == 'POST':
-    global paragraphs
+    global paragraphs, plen
     key = request.form['key'].strip().lower()
     found, plen = [], len(paragraphs)
     
@@ -36,9 +37,15 @@ def search():
           if key == v.lower() or key+'.' == v.lower() or key+',' == v.lower() or '('+key+')' == v.lower() or '[(]'+key+']' == v.lower() or '\"'+key+'\"' == v.lower() or '\''+key+'\'' == v.lower() or key+'/' == v.lower() or '/'+key == v.lower():
             found.append(i+1)
             break
+          
+    if len(found) > 0:
+      return render_template('paras.html', found=found, flen=len(found), paragraphs=paragraphs, plen=plen)
+    else:
+      return redirect('/search')
 
+  elif request.method == 'GET':
+    found = []
     return render_template('paras.html', found=found, flen=len(found), paragraphs=paragraphs, plen=plen)
-
   else:
     return render_template('home.html')
 
